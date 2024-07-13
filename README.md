@@ -7,6 +7,9 @@ I ran out of time from the 2 hours, so I have made a start on the backend API ho
 
 ## Quickstart
 
+Client runs on port 3001 (as fer default)
+Server runs on port 3002
+
 ### client
 - Make sure you have **node** installed
 - `cd client`
