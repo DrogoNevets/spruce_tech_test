@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2019",
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+  }
+}
