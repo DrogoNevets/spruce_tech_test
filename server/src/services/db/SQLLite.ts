@@ -1,5 +1,5 @@
 import sqlite3 from "sqlite3";
-import { TicTacToeDB, TicTacToeRow } from ".";
+import { Result, TicTacToeDB, TicTacToeRow } from ".";
 
 class SQLLiteDB implements TicTacToeDB {
   private _db;
@@ -39,6 +39,7 @@ class SQLLiteDB implements TicTacToeDB {
               }
             }
           );
+          
           this._db.run(
             "INSERT INTO data(player, wins, losses, draws) VALUES('O', 0, 0, 0)",
             (err) => {
@@ -79,6 +80,29 @@ class SQLLiteDB implements TicTacToeDB {
       });
     });
   }
+
+  registerResult(player: string, result: Result) {
+    return new Promise<boolean>((resolve, reject) => {
+      let col = 'draws';
+
+      switch(result) {
+        case Result.WIN:
+          col = 'wins'
+          break;
+        case Result.LOSS:
+          col = 'losses';
+          break;
+      }
+
+      this._db.run(`UPDATE data SET ${col} = ${col} + 1 WHERE player = ?`, player, (err) => {
+        if(err) {
+          return reject(err);
+        }
+      })
+
+      resolve(true);
+    });
+  };
 }
 
 export default new SQLLiteDB();

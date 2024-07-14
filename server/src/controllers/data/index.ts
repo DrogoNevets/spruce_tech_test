@@ -1,5 +1,5 @@
 import express from 'express';
-import defaultHandler from './default';
+import defaultHandler from './get';
 
 const app = express.Router();
 

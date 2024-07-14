@@ -3,6 +3,8 @@ import { XorO } from './types'
 import Cell from './components/Cell'
 import useCalculateWinner from './hooks/useCalculateWinner'
 import useCreateBoard from './hooks/useCreateBoard'
+import useRegisterResult from './hooks/useRegisterResult'
+import useInvertPlayer from './hooks/useInvertPlayer'
 
 export const Main = () => {
   const [player, setPlayer] = useState<XorO>('X');
@@ -10,6 +12,8 @@ export const Main = () => {
   const [turns, setTurn] = useState<number>(0);
   
   const createBoard = useCreateBoard();
+  const registerResult = useRegisterResult();
+  const invertPlayer = useInvertPlayer();
   const [board, setBoard] = useState<(XorO | undefined)[][]>(createBoard());
 
   const calculateWinner = useCalculateWinner(board.flatMap((cell) => cell));
@@ -34,15 +38,23 @@ export const Main = () => {
     const winner = calculateWinner();
     setWinner(winner);
 
+    if(winner) {
+      registerResult(winner, 'WIN');
+      registerResult(invertPlayer(winner), 'LOSS');
+    }
+
     if(!winner) {
       if(turns >= 9) {
         setWinner('DRAW');
+        registerResult('X', 'DRAW');
+        registerResult('O', 'DRAW');
       }
     }
   }, [board]);
 
   const resetBoard = () => {
     setBoard(createBoard());
+    setTurn(0);
   }
 
   const isDraw = useMemo(() => {
