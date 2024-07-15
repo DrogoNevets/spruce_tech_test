@@ -29,11 +29,7 @@ export const Main = () => {
       setBoard(newBoard);
       setTurn(turns + 1);
 
-      if(player === 'X') {
-        setPlayer('O');
-      } else {
-        setPlayer('X');
-      }
+      setPlayer(invertPlayer(player));
     }
   }
 
