@@ -20,9 +20,9 @@ class SQLLiteDB implements TicTacToeDB {
         `CREATE TABLE data(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           player TEXT,
-          wins INTEGER,
-          losses INTEGER,
-          draws INTEGER
+          wins INTEGER DEFAULT 0,
+          losses INTEGER DEFAULT 0,
+          draws INTEGER DEFAULT 0
       )`, (err) => {
           if (err) {
             console.error("Error creating table", err);
@@ -32,7 +32,7 @@ class SQLLiteDB implements TicTacToeDB {
           console.log("Created table");
           // Initialise data
           this._db.run(
-            "INSERT INTO data(player, wins, losses, draws) VALUES('X', 0, 0, 0)",
+            "INSERT INTO data(player) VALUES('X')",
             (err) => {
               if (err) {
                 console.error("Error inserting data", err);
@@ -41,7 +41,7 @@ class SQLLiteDB implements TicTacToeDB {
           );
           
           this._db.run(
-            "INSERT INTO data(player, wins, losses, draws) VALUES('O', 0, 0, 0)",
+            "INSERT INTO data(player) VALUES('O')",
             (err) => {
               if (err) {
                 console.error("Error inserting data", err);

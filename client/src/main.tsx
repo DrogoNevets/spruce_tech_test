@@ -78,6 +78,7 @@ export const Main = () => {
 
   const resetBoard = () => {
     setBoard(createBoard());
+    setWinner(null);
     setTurn(0);
   }
 
