@@ -41,10 +41,6 @@ export const Main = () => {
   }
 
   useEffect(() => {
-   getData();
-  }, []);
-
-  useEffect(() => {
     const processGame = async () => {
       const winner = calculateWinner();
       
