@@ -92,6 +92,9 @@ class SQLLiteDB implements TicTacToeDB {
         case Result.LOSS:
           col = 'losses';
           break;
+        case Result.DRAW:
+          col = 'draws';
+          break;
       }
 
       this._db.run(`UPDATE data SET ${col} = ${col} + 1 WHERE player = ?`, player, (err) => {
